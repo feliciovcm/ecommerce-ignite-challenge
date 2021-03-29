@@ -25,9 +25,45 @@ const Home = (): JSX.Element => {
   const [products, setProducts] = useState<ProductFormatted[]>([]);
   const { addProduct, cart } = useCart();
 
-  // const cartItemsAmount = cart.reduce((sumAmount, product) => {}, {
-  //   id: 0,
-  // } as CartItemsAmount);
+  const cartItemsAmount = cart.reduce(
+    (sumAmount, product) => {
+      switch (product.id) {
+        case 1:
+          sumAmount[1] = product.amount;
+          break;
+        case 2:
+          sumAmount[2] = product.amount;
+          break;
+        case 3:
+          sumAmount[3] = product.amount;
+          break;
+        case 4:
+          sumAmount[4] = product.amount;
+          break;
+        case 5:
+          sumAmount[5] = product.amount;
+          break;
+        case 6:
+          sumAmount[6] = product.amount;
+          break;
+
+        default: 
+        console.log("error");
+        
+          break;
+      }
+
+      return sumAmount;
+    },
+    {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+      6: 0,
+    } as CartItemsAmount
+  );
 
   useEffect(() => {
     async function loadProducts() {
@@ -45,7 +81,9 @@ const Home = (): JSX.Element => {
     loadProducts();
   }, []);
 
-  function handleAddProduct(id: number) {}
+  function handleAddProduct(id: number) {
+    addProduct(id);
+  }
 
   return (
     <ProductList>
@@ -54,7 +92,7 @@ const Home = (): JSX.Element => {
           <li>
             <img src={product.image} alt={product.title} />
             <strong>{product.title}</strong>
-            <span>{product.price}</span>
+            <span>{formatPrice(product.price)}</span>
             <button
               type="button"
               data-testid="add-product-button"
@@ -62,7 +100,7 @@ const Home = (): JSX.Element => {
             >
               <div data-testid="cart-product-quantity">
                 <MdAddShoppingCart size={16} color="#FFF" />
-                {/* {cartItemsAmount[product.id] || 0}*/} 2 
+                {cartItemsAmount[product.id] || 0} 
               </div>
 
               <span>ADICIONAR AO CARRINHO</span>

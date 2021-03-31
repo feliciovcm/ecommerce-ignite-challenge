@@ -47,9 +47,9 @@ const Home = (): JSX.Element => {
           sumAmount[6] = product.amount;
           break;
 
-        default: 
-        console.log("error");
-        
+        default:
+          console.log("error");
+
           break;
       }
 
@@ -70,8 +70,6 @@ const Home = (): JSX.Element => {
       api
         .get("/products")
         .then((res) => {
-          console.log(res.data);
-
           setProducts(res.data);
           return res;
         })
@@ -100,7 +98,7 @@ const Home = (): JSX.Element => {
             >
               <div data-testid="cart-product-quantity">
                 <MdAddShoppingCart size={16} color="#FFF" />
-                {cartItemsAmount[product.id] || 0} 
+                {cartItemsAmount[product.id] || 0}
               </div>
 
               <span>ADICIONAR AO CARRINHO</span>
